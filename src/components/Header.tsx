@@ -11,17 +11,19 @@ const Header = () => {
             <img
               src={kubeBurnerLogo}
               alt="KubeBurner"
-              className="h-8 w-8"
+              className="h-12 w-12"
             />
-            <span className="text-xl font-bold text-foreground">KubeBurner</span>
+            <a href="/">
+              <span className="text-xl font-bold text-foreground">KubeBurner</span>
+            </a>
           </div>
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">
+            <a href="/#features" className="text-muted-foreground hover:text-foreground transition-colors">
               Features
             </a>
-            <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors">
+            <a href="/#about" className="text-muted-foreground hover:text-foreground transition-colors">
               About
             </a>
             <a href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">

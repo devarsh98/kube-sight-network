@@ -153,7 +153,7 @@ const Contact = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-card border-border/50 shadow-card">
+              {/* <Card className="bg-gradient-card border-border/50 shadow-card">
                 <CardContent className="p-6">
                   <div className="flex items-start space-x-4">
                     <div className="p-3 rounded-lg bg-primary-light/10">
@@ -161,11 +161,11 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold text-foreground mb-2">Phone</h3>
-                      <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                      <p className="text-muted-foreground">+91 </p>
                     </div>
                   </div>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               <Card className="bg-gradient-card border-border/50 shadow-card">
                 <CardContent className="p-6">
@@ -176,8 +176,8 @@ const Contact = () => {
                     <div>
                       <h3 className="font-semibold text-foreground mb-2">Office</h3>
                       <p className="text-muted-foreground">
-                        123 Cloud Street<br />
-                        San Francisco, CA 94105
+                        {/* 123 Cloud Street<br /> */}
+                        Reva, Madhya Pradesh, 486001
                       </p>
                     </div>
                   </div>
