@@ -9,6 +9,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
 
+import { db } from '../firebase';
+import { ref, push } from "firebase/database";
+
 const Contact = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
@@ -18,28 +21,54 @@ const Contact = () => {
     message: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Simple form validation
-    if (!formData.name || !formData.email || !formData.organization) {
-      toast({
-        title: "Missing Information",
-        description: "Please fill in all required fields.",
-        variant: "destructive"
-      });
-      return;
-    }
+const handleSubmit = async (e: React.FormEvent) => { // Make sure it's 'async'
+  e.preventDefault();
 
-    // Simulate form submission
+  // Simple form validation - KEEP THIS!
+  if (!formData.name || !formData.email || !formData.organization) {
+    toast({
+      title: "Missing Information",
+      description: "Please fill in all required fields.",
+      variant: "destructive"
+    });
+    return; // Stop the function here if validation fails
+  }
+
+  // Prepare the data to be sent to Firebase
+  const messageData = {
+    name: formData.name,
+    email: formData.email,
+    organization: formData.organization,
+    message: formData.message, // Include the optional message field
+    timestamp: Date.now() // Always good to add a timestamp!
+  };
+
+  try {
+    // Reference to your 'contactMessages' path in the Realtime Database
+    const contactMessagesRef = ref(db, 'contactMessages');
+
+    // Send the data to Firebase Realtime Database using push()
+    await push(contactMessagesRef, messageData);
+
+    // Success toast notification - REPLACED SIMULATED SUBMISSION
     toast({
       title: "Message Sent!",
       description: "Thank you for your interest. We'll get back to you soon.",
     });
 
-    // Reset form
+    // Reset form fields after successful submission - KEEP THIS!
     setFormData({ name: "", email: "", organization: "", message: "" });
-  };
+
+  } catch (error) {
+    // Error handling with toast notification
+    console.error("Error sending message to Realtime Database: ", error);
+    toast({
+      title: "Submission Failed",
+      description: "There was an error sending your message. Please try again.",
+      variant: "destructive"
+    });
+  }
+};
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
